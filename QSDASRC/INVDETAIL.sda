@@ -1,0 +1,146 @@
+     A*%%TS  SD  20241218  060546  QSECOFR     
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A          R DETAIL
+     A*%%TS  SD  20241218  050243  QSECOFR
+     A                                  1  3'Inventory Mangler/400 - Asset Deta-
+     A                                      il View'
+     A                                      COLOR(WHT)
+     A                                  2  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                  3  3'ASST:'
+     A                                      COLOR(WHT)
+     A            OANBR          8A  O  3  9
+     A                                  3 19'NAME:'
+     A                                      COLOR(WHT)
+     A            OANAME        20A  O  3 25
+     A                                  5  3'DESCRIPTION:'
+     A                                      COLOR(WHT)
+     A            OADESC       100A  O  6  3
+     A                                  9  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                 10  3'VALUE: $'
+     A                                      COLOR(WHT)
+     A            OAVALUE        7D  O 10 12
+     A                                 10 21'TYPE:'
+     A                                      COLOR(WHT)
+     A            OATYPE         2A  O 10 27
+     A                                 10 31'STATUS:'
+     A                                      COLOR(WHT)
+     A            OASTS          1A  O 10 39
+     A                                 10 42'FUNCTIONAL:'
+     A                                      COLOR(WHT)
+     A            OAFUNC         1A  O 10 54
+     A                                 10 57'ACQ TYPE:'
+     A                                      COLOR(WHT)
+     A            OAATYPE        1A  O 10 67
+     A                                  3 67'QTY:'
+     A                                      COLOR(WHT)
+     A            OAQTY          4A  O  3 74
+     A                                 12  3'DATE ACQ:'
+     A                                      COLOR(WHT)
+     A            OADATEACQ     10A  O 12 13
+     A                                 12 26'DATE DISPOSED:'
+     A                                      COLOR(WHT)
+     A            OADATEDIS     10A  O 12 41
+     A                                 14  3'DONOR:'
+     A                                      COLOR(WHT)
+     A            OADONOR       20A  O 14 10
+     A                                 14 32'TAX RECEIPT?'
+     A                                      COLOR(WHT)
+     A            OATAX          1A  O 14 45
+     A                                 17  3'ACQING EMPL:'
+     A                                      COLOR(WHT)
+     A            OAEID          3A  O 17 16
+     A                                 17 21'EMPL REIMBURSE?'
+     A                                      COLOR(WHT)
+     A            OAREIMB        1A  O 17 37
+     A                                 23  3'F3=Exit  F5=Edit  F8=Print  F12=Ca-
+     A                                      ncel'
+     A                                      COLOR(BLU)
+     A                                  4 19'MT/M:'
+     A                                      COLOR(WHT)
+     A            OAMT           4A  O  4 25
+     A            OAM            3A  O  4 30
+     A                                  4 35'SN:'
+     A                                      COLOR(WHT)
+     A            OASN          12A  O  4 39
+     A          R DETAILEDT
+     A*%%TS  SD  20241218  060546  QSECOFR     
+     A                                  1  3'Inventory Mangler/400 - Add or Edi-
+     A                                      t Asset'
+     A                                      COLOR(WHT)
+     A                                  2  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                  3  3'ASST:'
+     A                                      COLOR(WHT)
+     A            OANBR          8A  B  3  9
+     A                                  3 19'NAME:'
+     A                                      COLOR(WHT)
+     A            OANAME        20A  B  3 25
+     A N70                                  DSPATR(RI)
+     A                                  5  3'DESCRIPTION:'
+     A                                      COLOR(WHT)
+     A            OADESC       100A  B  6  3
+     A                                  9  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                 10  3'VALUE: $'
+     A                                      COLOR(WHT)
+     A            OAVALUE        7D  B 10 12
+     A                                 10 21'TYPE:'
+     A                                      COLOR(WHT)
+     A            OATYPE         2A  B 10 27
+     A N71                                  DSPATR(RI)
+     A                                 10 31'STATUS:'
+     A                                      COLOR(WHT)
+     A            OASTS          1A  B 10 39
+     A N72                                  DSPATR(RI)
+     A                                 10 42'FUNCTIONAL:'
+     A                                      COLOR(WHT)
+     A            OAFUNC         1A  B 10 54
+     A N73                                  DSPATR(RI)
+     A                                 10 57'ACQ TYPE:'
+     A                                      COLOR(WHT)
+     A            OAATYPE        1A  B 10 67
+     A N74                                  DSPATR(RI)
+     A                                  3 67'QTY:'
+     A                                      COLOR(WHT)
+     A            OAQTY          4A  B  3 74DFTVAL('0001')
+     A N75                                  DSPATR(RI)
+     A                                 12  3'DATE ACQ:'
+     A                                      COLOR(WHT)
+     A            OADATEACQ     10A  B 12 13
+     A                                 12 26'DATE DISPOSED:'
+     A                                      COLOR(WHT)
+     A            OADATEDIS     10A  B 12 41
+     A                                 14  3'DONOR:'
+     A                                      COLOR(WHT)
+     A            OADONOR       20A  B 14 10
+     A                                 14 32'TAX RECEIPT?'
+     A                                      COLOR(WHT)
+     A            OATAX          1A  B 14 45
+     A N76                                  DSPATR(RI)
+     A                                 17  3'ACQING EMPL:'
+     A                                      COLOR(WHT)
+     A            OAEID          3A  B 17 16
+     A N77                                  DSPATR(RI)
+     A                                 17 21'EMPL REIMBURSE?'
+     A                                      COLOR(WHT)
+     A            OAREIMB        1A  B 17 37
+     A N78                                  DSPATR(RI)
+     A                                 23  3'F3=Exit  F8=Print  F12=Ca-
+     A                                      ncel'
+     A                                      COLOR(BLU)
+     A                                  4 19'MT/M:'
+     A                                      COLOR(WHT)
+     A            OAMT           4A  B  4 25
+     A            OAM            3A  B  4 30
+     A                                  4 35'SN:'
+     A                                      COLOR(WHT)
+     A            OASN          12A  B  4 39
+     A            ERRORLINE     50A  O 20  3COLOR(RED)

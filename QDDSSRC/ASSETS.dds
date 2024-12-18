@@ -1,0 +1,21 @@
+                                            UNIQUE
+     A          R ASSTREC
+     A            ASSTNBR        8P 0       TEXT('ASSET NUMBER')
+     A            ASSTVAL        6P 2       TEXT('ASSET VALUE')
+     A            ASSTNAME      20A         TEXT('ASSET NAME')
+     A            ASSTDESC     100A         TEXT('ASSET DESCRIPTION')
+     A            ASSTTYP        2A         TEXT('ASSET TYPE')
+     A            ASSTSTS        1A         TEXT('ASSET STATUS')
+     A            ASSTFUNC       1A         TEXT('FUNCTIONAL STATUS')
+     A            ASSTACQT       1A         TEXT('ACQ TYPE')
+     A            ASSTQTY        4P 0       TEXT('ASSET QTY')
+     A            ASSTDONOR     20A         TEXT('DONOR')
+     A            ASSTACQ         L         TEXT('DATE ACQD')
+     A            ASSTDISP        L         TEXT('DATE DISPOSED')
+     A            ASSTEMPL       3A         TEXT('EMPLOYEE')
+     A            ASSTREMB       1A         TEXT('REIMBURSED')
+     A            ASSTTAX        1A         TEXT('TAX RECEIPT?')
+     A            ASSTMT         4P 0       TEXT('MACHINE TYPE')
+     A            ASSTM          3A         TEXT('MODEL')
+     A            ASSTSN        12A         TEXT('SERIAL NBR')
+     A          K ASSTNBR

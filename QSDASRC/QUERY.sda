@@ -1,0 +1,27 @@
+     A*%%TS  SD  20241217  082918  QSECOFR     
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A          R QRYMENU
+     A*%%TS  SD  20241217  082918  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                  1  3'Inventory Mangler/400 - Query'
+     A                                  2  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                  4  8'1. Query by Asset Tag'
+     A                                  5  8'2. Query by Asset Type'
+     A                                  6  8'3. Query by Date (Exact)'
+     A                                  7  8'4. Query by Date (Range)'
+     A                                  8  8'5. Query by Employee ID'
+     A                                  9  8'6. Query by Donor Name'
+     A                                 11  8'Choice:'
+     A            FLD001         1   I 11 18
+     A                                 24  9'F3 = Exit'
+     A          R QRYTAG
+     A*%%TS  SD  20241217  082918  QSECOFR     
+     A                                  1  3'IM/400 - Asset Tag Query'
+     A                                  2  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                  4  8'Asset Tag:'
+     A                                 24  9'F3 = Exit'
+     A            FLD002         4   I  4 21

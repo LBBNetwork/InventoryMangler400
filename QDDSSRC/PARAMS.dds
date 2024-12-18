@@ -1,0 +1,5 @@
+     A                                      UNIQUE
+     A          R PARAMREC
+     A            TYPECODE       2A         TEXT('TYPE CODE')
+     A            TYPEDESC      20A         TEXT('TYPE DESCRIPTION')
+     A          K TYPECODE
