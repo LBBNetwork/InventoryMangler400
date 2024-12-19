@@ -1,0 +1,48 @@
+     A*%%TS  SD  20241219  090834  QSECOFR
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A          R OVRSFL                    SFL
+     A*%%TS  SD  20241219  090834  QSECOFR     REL-V6R1M0  5761-WDS
+     A            SFLASSTNBR     8A  O  7  7
+     A            SFLNAME       20A  O  7 16
+     A            SFLMT          4A  O  7 37
+     A            SFLM           3A  O  7 42
+     A            SFLSN         12A  O  7 46
+     A            SFLTYPE        2A  O  7 59
+     A            SFLSTS         1A  O  7 64
+     A            SFLOPT         1   I  7  3
+     A          R OVRCTL                    SFLCTL(OVRSFL)
+     A*%%TS  SD  20241219  072607  QSECOFR
+     A  50                                  SFLDSP
+     A  50                                  SFLDSPCTL
+     A N50                                  SFLCLR
+     A  50                                  SFLEND(*MORE)
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(0010)
+     A                                  1  3'Inventory Mangler/400'
+     A                                      COLOR(WHT)
+     A                                  2  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                  3  3'1 = View Record  2 = Edit Record'
+     A                                  4  3'__________________________________-
+     A                                      ___________________________________-
+     A                                      ________'
+     A                                  6  3'Opt'
+     A                                      COLOR(WHT)
+     A                                  6  7'AssetNbr'
+     A                                      COLOR(WHT)
+     A                                  6 16'Name'
+     A                                      COLOR(WHT)
+     A                                  6 37'MT'
+     A                                      COLOR(WHT)
+     A                                  6 42'Mdl'
+     A                                      COLOR(WHT)
+     A                                  6 46'Serial'
+     A                                      COLOR(WHT)
+     A                                  6 53'Nbr'
+     A                                      COLOR(WHT)
+     A                                  6 59'Type'
+     A                                      COLOR(WHT)
+     A                                  6 64'Status'
+     A                                      COLOR(WHT)
