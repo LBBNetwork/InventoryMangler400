@@ -10,29 +10,52 @@
      C     ASTID         SETLL     ASSTREC
      C                   READ      ASSETS
      C
-     C                   MOVEL     ASSTNBR       OANBR
-     C                   MOVEL     ASSTVAL       OAVALUE
+     C                   MOVE      ASSTNBR       OANBR
+     C                   MOVE      ASSTVAL       OAVALUE
      C                   MOVEL     ASSTNAME      OANAME
      C                   MOVEL     ASSTDESC      OADESC
-     C                   MOVEL     ASSTTYP       OATYPE
-     C                   MOVEL     ASSTSTS       OASTS
-     C                   MOVEL     ASSTFUNC      OAFUNC
-     C                   MOVEL     ASSTACQT      OAATYPE
+     C                   MOVE      ASSTTYP       OATYPE
+     C                   MOVE      ASSTSTS       OASTS
+     C                   MOVE      ASSTFUNC      OAFUNC
+     C                   MOVE      ASSTACQT      OAATYPE
      C                   MOVEL     ASSTQTY       OAQTY
      C                   MOVEL     ASSTDONOR     OADONOR
-     C                   MOVEL     ASSTACQ       OADATEACQ
-     C                   MOVEL     ASSTDISP      OADATEDIS
-     C                   MOVEL     ASSTEMPL      OAEID
-     C                   MOVEL     ASSTREMB      OAREIMB
+     C                   MOVE      ASSTACQ       OADATEACQ
+     C                   MOVE      ASSTDISP      OADATEDIS
+     C                   MOVE      ASSTEMPL      OAEID
+     C                   MOVE      ASSTREMB      OAREIMB
      C                   MOVEL     ASSTTAX       OATAX
      C                   MOVEL     ASSTMT        OAMT
-     C                   MOVEL     ASSTM         OAM
+     C                   MOVE      ASSTM         OAM
      C                   MOVEL     ASSTSN        OASN
+     C*                  MOVEL     ASSTLCN       OALCN
+     C
+     C                   CLOSE     ASSETS
      C
      C                   EXFMT     DETAIL
      C
+     C                   DO
+     C                   IF        *IN03 = *ON
+     C                   EXSR      DIE
+     C                   ENDIF
+     C
+     C                   IF        *IN05 = *ON
+     C*CALL ASSTEDT WITH THIS ASSET NBR
+     C                   ENDIF
+     C
+     C                   IF        *IN08 = *ON
+     C*PRINT THIS ASSET TO SYSTEM PTR
+     C                   ENDIF
+     C
+     C                   IF        *IN12 = *ON
+     C                   EXSR      DIE
+     C                   ENDIF
+     C                   ENDDO
+      *--------------------------------
+     C     DIE           BEGSR
      C                   MOVEL     *ON           *INLR
      C                   RETURN
+     C                   ENDSR
       *--------------------------------
      C     CHKPARM       BEGSR
      C                   MOVEL     ASSETNBR      ASTID

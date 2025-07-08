@@ -1,7 +1,8 @@
      FASSETS    UF A E           K DISK
      FINVDETAIL CF   E             WORKSTN
      DASTID            S              8P 0
-     DALWEXT           S              1P 0
+     DALWSAV           S              1P 0
+     DNEWOREDT         S              1P 0
      DERRTEST          C                   CONST('this is only a test')
      DERRNAME          C                   CONST('Must provide asset name')
      DERRTYPE          C                   CONST('Invalid Asset Type')
@@ -16,16 +17,18 @@
      D                                            acquiring employee')
      DERRREMB          C                   CONST('Must specify if employee +
      D                                            was reimbursed')
-     DERRLOC           C                   CONST('Must specify a location')
+     DERRLCN           C                   CONST('Must specify a location')
+     DERRSAVED         C                   CONST('Asset record was saved')
      DERRMULTI         C                   CONST('Multiple errors found, +
      D                                            correct fields')
+     DERRNEW           C                   CONST('Creating new asset')
       *--------------------------------
      C     *ENTRY        PLIST
      C                   PARM                    ASSETNBR          8
       *--------------------------------
      C                   EXSR      CHKPARM
      C
-     C                   MOVEL     0             ALWEXT
+     C                   MOVEL     0             ALWSAV
      C
      C     ASTID         SETLL     ASSTREC
      C                   READ      ASSETS
@@ -49,14 +52,44 @@
      C                   MOVEL     ASSTM         OAM
      C                   MOVEL     ASSTSN        OASN
      C
-     C                   MOVEL     ERRTEST       ERRORLINE
      C                   EXFMT     DETAILEDT
      C
-     C                   DOW       ALWEXT = *ZERO
+     C                   DO
+     C                   IF        *IN03 = *ON
+     C                   EXSR      DIE
+     C                   ENDIF
+     C
+     C                   IF        *IN05 = *ON
      C                   EXSR      VALIDATE
+     C                   IF        ALWSAV = 1
+     C                   EXSR      WRITERCD
+     C                   MOVEL     ERRSAVED      ERRORLINE
+     C                   ENDIF
      C                   EXFMT     DETAILEDT
+     C                   ENDIF
      C
-     C                   IF        ALWEXT = 1
+     C                   IF        *IN12 = *ON
+     C                   EXSR      DIE
+     C                   ENDIF
+     C                   ENDDO
+      *--------------------------------
+     C     LOADASST      BEGSR
+     C                   ENDSR
+      *--------------------------------
+     C     CRTASST       BEGSR
+     C                   MOVEL     ERRNEW        ERRORLINE
+     C                   ENDSR
+      *--------------------------------
+     C     VALIDATE      BEGSR
+     C                   IF        OANAME = *BLANK
+     C                   MOVEL     *ON           *IN70
+     C                   MOVEL     ERRNAME       ERRORLINE
+     C                   ELSE
+     C                   EVAL      ALWSAV = 1
+     C                   ENDIF
+     C                   ENDSR
+      *--------------------------------
+     C     WRITERCD      BEGSR
      C*                  MOVEL     OANBR         ASSTNBR
      C                   MOVEL     OAVALUE       ASSTVAL
      C                   MOVEL     OANAME        ASSTNAME
@@ -75,22 +108,19 @@
      C                   MOVEL     OAMT          ASSTMT
      C                   MOVEL     OAM           ASSTM
      C                   MOVEL     OASN          ASSTSN
+     C                   MOVEL     OALCN         ASSTLCN
      C
      C                   UPDATE    ASSTREC
+     C                   ENDSR
+      *--------------------------------
+     C     DIE           BEGSR
      C                   MOVEL     *ON           *INLR
      C                   RETURN
-     C                   ENDIF
-     C                   ENDDO
-      *--------------------------------
-     C     VALIDATE      BEGSR
-     C                   IF        OANAME = *BLANK
-     C                   MOVEL     *ON           *IN70
-     C                   MOVEL     ERRNAME       ERRORLINE
-     C                   ELSE
-     C                   EVAL      ALWEXT = 1
-     C                   ENDIF
      C                   ENDSR
       *--------------------------------
      C     CHKPARM       BEGSR
+     C                   IF        ASSETNBR = 'NEW'
+     C                   EXSR      CRTASST
+     C                   ENDIF
      C                   MOVEL     ASSETNBR      ASTID
      C                   ENDSR
