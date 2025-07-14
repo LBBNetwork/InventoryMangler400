@@ -1,0 +1,5 @@
+                                            UNIQUE
+     A          R NOTEREC
+     A            PAGENBR        4P 0       TEXT('PAGE NBR')
+     A            NOTE        1024A         TEXT('NOTE')
+     A          K PAGENBR

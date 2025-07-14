@@ -1,4 +1,4 @@
-     A*%%TS  SD  20241219  090834  QSECOFR
+     A*%%TS  SD  20241219  090834  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3)
      A          R OVRSFL                    SFL
@@ -12,7 +12,7 @@
      A            SFLSTS         1A  O  7 64
      A            SFLOPT         1   I  7  3
      A          R OVRCTL                    SFLCTL(OVRSFL)
-     A*%%TS  SD  20241219  072607  QSECOFR
+     A*%%TS  SD  20241219  072607  QSECOFR     REL-V6R1M0  5761-WDS
      A  50                                  SFLDSP
      A  50                                  SFLDSPCTL
      A N50                                  SFLCLR

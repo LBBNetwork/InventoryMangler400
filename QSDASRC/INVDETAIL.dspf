@@ -1,9 +1,9 @@
-     A*%%TS  SD  20250708  093210  QSECOFR
+     A*%%TS  SD  20250708  093210  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3)
      A                                      PRINT
      A          R DETAIL
-     A*%%TS  SD  20250708  093210  QSECOFR
+     A*%%TS  SD  20250708  093210  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      CF03(03 'Exit')
      A                                      CF05(05 'Edit')
      A                                      CF08(08 'Print')
@@ -76,7 +76,7 @@
      A                                      DSPATR(HI)
      A            OALCN         10   O 12 64
      A          R DETAILEDT
-     A*%%TS  SD  20250708  093210  QSECOFR
+     A*%%TS  SD  20250708  093210  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      CF03(03 'Exit')
      A                                      CF05(05 'Save')
      A                                      CF12(12 'Cancel')

@@ -1,0 +1,58 @@
+     A*%%TS  SD  20250709  144942  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A          R SCRATCH
+     A*%%TS  SD  20250709  144942  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                  1  2'123456789012345678901             -
+     A                                                                         -
+     A                                                1'
+     A                                  3  1'2'
+     A                                  4  1'3'
+     A                                  5  1'4'
+     A                                  6  1'5'
+     A                                  7  1'6'
+     A                                  8  1'7'
+     A                                  9  1'8'
+     A                                 10  1'9'
+     A                                 11  1'0'
+     A                                 12  1'1'
+     A                                 13  1'2'
+     A          R SCRATCH2
+     A*%%TS  SD  20250709  144942  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                  1  2'IM/400 Mini Add      .            -
+     A                                                                         -
+     A                                                 '
+     A                                  2 23'.'
+     A                                  3 23'.'
+     A                                  4 23'.'
+     A                                  5 23'.'
+     A                                  6 23'.'
+     A                                  7 23'.'
+     A                                  8 23'.'
+     A                                 14  1'...................... '
+     A                                  2  3'ASSET NAME'
+     A                                 10 19'   '
+     A                                 12 19'   '
+     A                                  9 23'.'
+     A                                 10 23'.'
+     A                                 10 17' '
+     A                                 12 17' '
+     A                                 13  2'ENT SavNxt SH2 Quit'
+     A                                 13 23'.'
+     A            FLD014        19   I  3  3
+     A                                  4  3'QTY'
+     A            FLD015         4   I  4  7
+     A                                  4 12'ACQTYP'
+     A            FLD016         1   I  4 20
+     A                                  5  3'SN'
+     A            FLD017        15   I  5  6
+     A                                  6  3'LOCATION'
+     A            FLD018        19   I  7  3
+     A                                  9  3'DATE'
+     A                                  9  8'ACQ'
+     A            FLD019         9   I  9 12
+     A                                 10  3'EMPLID'
+     A            FLD020         3   I 10 10
+     A                                 11  3'ASSET'
+     A                                 11  9'ID'
+     A            FLD021         8   I 11 13

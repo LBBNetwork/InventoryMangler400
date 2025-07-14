@@ -1,0 +1,14 @@
+                                            UNIQUE
+     A          R TAXREC
+     A            TAXNBR         8P 0       TEXT('RECEIPT NBR')
+     A            TAXNAME       20A         TEXT('DONOR NAME')
+     A            TAXSTREET     50A         TEXT('STREET NM')
+     A            TAXCITY       20A         TEXT('CITY')
+     A            TAXSTATE       3A         TEXT('STATE')
+     A            TAXZIP        10A         TEXT('ZIP+4')
+     A            TAXTEL        11P 0       TEXT('TELEPH')
+     A            TAXTANG        1A         TEXT('TANGIBLE DONATION?')
+     A            TAXDATE         L         TEXT('DATE')
+     A            TAXNTITM      20A         TEXT('NT DESCRIPTION')
+     A            TAXNTVALU      6P 2       TEXT('NT CASH VALUE')
+     A          K TAXNBR

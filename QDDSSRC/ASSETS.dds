@@ -15,6 +15,7 @@
      A            ASSTEMPL       3A         TEXT('EMPLOYEE')
      A            ASSTREMB       1A         TEXT('REIMBURSED')
      A            ASSTTAX        1A         TEXT('TAX RECEIPT?')
+     A            ASSTTID        8P 0       TEXT('TAX RCPT ID')
      A            ASSTMT         4P 0       TEXT('MACHINE TYPE')
      A            ASSTM          3A         TEXT('MODEL')
      A            ASSTSN        12A         TEXT('SERIAL NBR')

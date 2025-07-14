@@ -3,6 +3,7 @@
      DASTID            S              8P 0
      DALWSAV           S              1P 0
      DNEWOREDT         S              1P 0
+     DTAXNBR           S              8P 0
      DERRTEST          C                   CONST('this is only a test')
      DERRNAME          C                   CONST('Must provide asset name')
      DERRTYPE          C                   CONST('Invalid Asset Type')
@@ -25,6 +26,8 @@
       *--------------------------------
      C     *ENTRY        PLIST
      C                   PARM                    ASSETNBR          8
+     C                   PARM                    EMPID             3
+     C                   PARM                    TAXABLE           1
       *--------------------------------
      C                   EXSR      CHKPARM
      C
@@ -78,6 +81,9 @@
       *--------------------------------
      C     CRTASST       BEGSR
      C                   MOVEL     ERRNEW        ERRORLINE
+     C                   ENDSR
+      *--------------------------------
+     C     TAXLOOP       BEGSR
      C                   ENDSR
       *--------------------------------
      C     VALIDATE      BEGSR
