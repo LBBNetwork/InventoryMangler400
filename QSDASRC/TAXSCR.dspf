@@ -1,0 +1,71 @@
+     A*%%TS  SD  20250715  101407  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A          R TAXSTART
+     A*%%TS  SD  20250715  101407  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF01(01 'Start a Tangible Donation')
+     A                                      CF02(02 'Start a Non-tangible Donat-
+     A                                      ion')
+     A                                      CF12(12 'Exit Program')
+     A                                  1  3'Inventory Mangler - Select Tax Rec-
+     A                                      eipt Function'
+     A                                  3  3'Is this tax receipt for...'
+     A                                  4  7'F1. Physical Goods Donation'
+     A                                      COLOR(WHT)
+     A                                  5  7'F2. Non-Physical Donation (cash, s-
+     A                                      ervices rendered, etc.)'
+     A                                      COLOR(WHT)
+     A                                  9  3'Press Function key to continue'
+     A                                  7  7'F12. Cancel'
+     A                                      COLOR(WHT)
+     A          R TAXADD
+     A*%%TS  SD  20250715  101407  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF05(05 'Save Tax Receipt')
+     A                                      CF06(06 'Save and Print Tax Receipt-
+     A                                      ')
+     A                                      CF12(12 'Exit Program')
+     A                                  1  3'Inventory Mangler - Add Donor Info-
+     A                                      rmation'
+     A                                  2  3'-----------------------------------
+     A                                      ------------------------------------
+     A                                      --------'
+     A            OUTRNBR        8A  O  1 72COLOR(WHT)
+     A                                  1 55'Tax Rcpt Number'
+     A                                      COLOR(WHT)
+     A                                  3  3'Donor Name:'
+     A            INDNAME       20A  I  3 16
+     A                                  4  3'Donor Addr:'
+     A            INDADDR       50A  I  4 16
+     A                                  5  3'Donor City:'
+     A            INDCITY       20A  I  5 16
+     A                                  5 38'St:'
+     A            INDST          3A  I  5 43
+     A                                  5 48'Zip4:'
+     A            INDZIP4       10A  I  5 55
+     A                                  6  3'Donor Telephone:'
+     A            INDTEL        11A  I  6 21
+     A                                  7  3'-----------------------------------
+     A                                      ------------------------------------
+     A                                      --------'
+     A                                  8  3'Starting Asset ID:'
+     A  70                                  DSPATR(ND)
+     A            INSASSET       8A  I  8 23
+     A  70                                  DSPATR(ND)
+     A                                  8 35'Ending Asset ID:'
+     A  70                                  DSPATR(ND)
+     A            INEASSET       8A  I  8 53
+     A  70                                  DSPATR(ND)
+     A                                  6 43'Donation'
+     A                                  6 52'Date:'
+     A                                 10  3'Non-tangible Donation Description:'
+     A  71                                  DSPATR(ND)
+     A            INNTDESC      20A  I 10 40
+     A  71                                  DSPATR(ND)
+     A                                 11  3'Non-tangible Donation Value:'
+     A  71                                  DSPATR(ND)
+     A            INNTVALUE      8A  I 11 40
+     A  71                                  DSPATR(ND)
+     A                                 23  3'F5 = Save   F6 = Save and Print   -
+     A                                      F12 = Cancel'
+     A                                      COLOR(BLU)
+     A            ERRLINE       75A  O 13  3COLOR(RED)
