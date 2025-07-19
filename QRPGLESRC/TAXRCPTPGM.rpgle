@@ -3,6 +3,10 @@
      FTAXSCR    CF   E             WORKSTN
      DSTRADD           S              1P 0
      DPHYSDON          S              1P 0
+     DLSTTAXID         S              8P 0
+     DNEWTAXID         S              8P 0
+     DSTRASSET         S              8P 0
+     DENDASSET         S              8P 0
       *----------------------------------------------------------
       *This program handles the donor specific things for the CCC
       *
@@ -18,6 +22,8 @@
       *The DONOR file should also have extra fields for one-time non-tang
       *ible donations; a month's free rent, $1,000 cash donation, etc
       *----------------------------------------------------------
+     C                   EXSR      GETLSTRCPT
+     C
      C                   DOU       STRADD = 1
      C                   EXFMT     TAXSTART
      C
@@ -50,12 +56,23 @@
      C                   EXSR      DIE
      C                   ENDIF
      C
-     C                   EXSR      VALIDATE
-     C                   EXSR      WRITERCD
-     C                   EXSR      DIE
+     C*                  EXSR      VALIDATE
+     C*                  EXSR      WRITERCD
+     C*                  EXSR      DIE
      C                   ENDSR
       *----------------------------------------------------------
      C     GETLSTRCPT    BEGSR
+     C     *LOVAL        SETLL     TAXRCPT
+     C                   READ      TAXRCPT
+     C
+     C                   DOU       %EOF(TAXRCPT)
+     C                   READ      TAXRCPT
+     C                   ENDDO
+     C
+     C                   MOVEL     TAXNBR        LSTTAXID
+     C                   MOVEL     TAXNBR        NEWTAXID
+     C                   ADD       1             NEWTAXID
+     C                   MOVEL     NEWTAXID      OUTRNBR
      C                   ENDSR
       *----------------------------------------------------------
      C     VALIDATE      BEGSR
@@ -64,24 +81,38 @@
      C     WRITERCD      BEGSR
      C*                  OPEN      TAXRCPT
      C
-     C                   MOVE      1             TAXNBR
+     C                   MOVE      NEWTAXID      TAXNBR
      C                   MOVEL     INDNAME       TAXNAME
+     C                   MOVEL     INDADDR       TAXSTREET
      C                   MOVEL     INDCITY       TAXCITY
-     C                   MOVEL     INDST         TAXSTREET
+     C                   MOVEL     INDST         TAXSTATE
      C                   MOVEL     INDZIP4       TAXZIP
      C                   MOVEL     INDTEL        TAXTEL
      C
      C                   IF        PHYSDON = 1
-     C*JUMP INTO A LOOP FOR THE MASTER ASS1T FILE HERE
      C                   MOVEL     'NA'          TAXNTITM
      C                   MOVEL     0             TAXNTVALU
+     C
+     C                   MOVEL     INSASSET      STRASSET
+     C                   MOVEL     INEASSET      ENDASSET
+     C
+     C     STRASSET      CHAIN     ASSTREC
+     C*                  READ      ASSETS
+     C                   DOU       STRASSET = ENDASSET
+     C                   MOVEL     NEWTAXID      ASSTTID
+     C                   MOVEL     'Y'           ASSTTAX
+     C                   MOVEL     INDNAME       ASSTDONOR
+     C                   UPDATE    ASSTREC
+     C                   ADD       1             STRASSET
+     C                   READ      ASSETS
+     C                   ENDDO
      C                   ELSE
      C                   MOVEL     INNTDESC      TAXNTITM
      C                   MOVEL     INNTVALUE     TAXNTVALU
      C                   ENDIF
      C
      C                   WRITE     TAXREC
-     C                   CLOSE     TAXRCPT
+     C*                  CLOSE     TAXRCPT
 
      C                   ENDSR
       *----------------------------------------------------------

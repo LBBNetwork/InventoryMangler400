@@ -1,0 +1,7 @@
+             QSYS/PGM   PARM(&LAUNCHPARM)
+             QSYS/DCL   VAR(&LAUNCHPARM) TYPE(*CHAR) LEN(10)
+             QSYS/OVRDBF FILE(NOTES) TOFILE(INVMGLR400/NOTES) +
+                          MBR(&LAUNCHPARM)
+             QSYS/CALL  PGM(INVMGLR400/NOTES)
+             QSYS/DLTOVR FILE(NOTES)
+             QSYS/ENDPGM

@@ -1,9 +1,15 @@
      FASSETS    UF A E           K DISK
      FINVDETAIL CF   E             WORKSTN
      DASTID            S              8P 0
+     DPARMSTR1         S              9A
+     DPARMSTR2         S             10A
+     DPARMNBR          S              8A
       *--------------------------------
      C     *ENTRY        PLIST
      C                   PARM                    ASSETNBR          8
+      *--------------------------------
+     C     NOTEPARM      PLIST
+     C                   PARM                    CLPARM           10
       *--------------------------------
      C                   EXSR      CHKPARM
      C
@@ -30,7 +36,7 @@
      C                   MOVEL     ASSTSN        OASN
      C*                  MOVEL     ASSTLCN       OALCN
      C
-     C                   CLOSE     ASSETS
+     C*                  CLOSE     ASSETS
      C
      C                   EXFMT     DETAIL
      C
@@ -45,6 +51,15 @@
      C
      C                   IF        *IN08 = *ON
      C*PRINT THIS ASSET TO SYSTEM PTR
+     C                   ENDIF
+     C
+     C                   IF        *IN09 = *ON
+     C*PULL UP NOTE VIEWER FOR THIS ASSET
+     C                   MOVEL     ASSTNBR       PARMNBR
+     C     '"'           CAT       PARMNBR       PARMSTR1
+     C     PARMSTR1      CAT       '"'           PARMSTR2
+     C                   MOVEL     PARMSTR2      CLPARM
+     C                   CALL      'STRNOTES'    NOTEPARM
      C                   ENDIF
      C
      C                   IF        *IN12 = *ON

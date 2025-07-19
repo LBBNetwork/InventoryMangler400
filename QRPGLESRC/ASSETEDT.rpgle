@@ -4,6 +4,7 @@
      DALWSAV           S              1P 0
      DNEWOREDT         S              1P 0
      DTAXNBR           S              8P 0
+     DNOTENBR          S              8A
      DERRTEST          C                   CONST('this is only a test')
      DERRNAME          C                   CONST('Must provide asset name')
      DERRTYPE          C                   CONST('Invalid Asset Type')
@@ -27,7 +28,9 @@
      C     *ENTRY        PLIST
      C                   PARM                    ASSETNBR          8
      C                   PARM                    EMPID             3
-     C                   PARM                    TAXABLE           1
+      *--------------------------------
+     C     NOTEPARM      PLIST
+     C                   PARM                    CLPARM            8
       *--------------------------------
      C                   EXSR      CHKPARM
      C
@@ -96,7 +99,7 @@
      C                   ENDSR
       *--------------------------------
      C     WRITERCD      BEGSR
-     C*                  MOVEL     OANBR         ASSTNBR
+     C                   MOVEL     OANBR         ASSTNBR
      C                   MOVEL     OAVALUE       ASSTVAL
      C                   MOVEL     OANAME        ASSTNAME
      C                   MOVEL     OADESC        ASSTDESC
@@ -116,7 +119,15 @@
      C                   MOVEL     OASN          ASSTSN
      C                   MOVEL     OALCN         ASSTLCN
      C
+     C                   IF        NEWOREDT = 0
      C                   UPDATE    ASSTREC
+     C                   ELSE
+     C                   WRITE     ASSTREC
+     C                   ENDIF
+     C
+     C                   MOVEL     OANBR         NOTENBR
+     C                   MOVEL     NOTENBR       CLPARM
+     C                   CALL      'CRTNOTES'    NOTEPARM
      C                   ENDSR
       *--------------------------------
      C     DIE           BEGSR
@@ -126,7 +137,10 @@
       *--------------------------------
      C     CHKPARM       BEGSR
      C                   IF        ASSETNBR = 'NEW'
+     C                   MOVEL     1             NEWOREDT
      C                   EXSR      CRTASST
+     C                   ELSE
+     C                   MOVEL     0             NEWOREDT
      C                   ENDIF
      C                   MOVEL     ASSETNBR      ASTID
      C                   ENDSR
