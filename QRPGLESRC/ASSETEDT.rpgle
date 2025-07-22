@@ -1,11 +1,13 @@
      FASSETS    UF A E           K DISK
      FINVDETAIL CF   E             WORKSTN
      DASTID            S              8P 0
-     DALWSAV           S              1P 0
+     DALWSAV           S              2P 0
      DNEWOREDT         S              1P 0
      DTAXNBR           S              8P 0
+     DNEWQTY           S              4P 0
      DNOTENBR          S              8A
-     DERRTEST          C                   CONST('this is only a test')
+     DEMPLNAM          S              3A
+     DERRTEST          C                   CONST('Validty check error')
      DERRNAME          C                   CONST('Must provide asset name')
      DERRTYPE          C                   CONST('Invalid Asset Type')
      DERRSTS           C                   CONST('Status must be (A)ctive, +
@@ -35,28 +37,6 @@
      C                   EXSR      CHKPARM
      C
      C                   MOVEL     0             ALWSAV
-     C
-     C     ASTID         SETLL     ASSTREC
-     C                   READ      ASSETS
-     C
-     C                   MOVEL     ASSTNBR       OANBR
-     C                   MOVEL     ASSTVAL       OAVALUE
-     C                   MOVEL     ASSTNAME      OANAME
-     C                   MOVEL     ASSTDESC      OADESC
-     C                   MOVEL     ASSTTYP       OATYPE
-     C                   MOVEL     ASSTSTS       OASTS
-     C                   MOVEL     ASSTFUNC      OAFUNC
-     C                   MOVEL     ASSTACQT      OAATYPE
-     C                   MOVEL     ASSTQTY       OAQTY
-     C                   MOVEL     ASSTDONOR     OADONOR
-     C                   MOVEL     ASSTACQ       OADATEACQ
-     C                   MOVEL     ASSTDISP      OADATEDIS
-     C                   MOVEL     ASSTEMPL      OAEID
-     C                   MOVEL     ASSTREMB      OAREIMB
-     C                   MOVEL     ASSTTAX       OATAX
-     C                   MOVEL     ASSTMT        OAMT
-     C                   MOVEL     ASSTM         OAM
-     C                   MOVEL     ASSTSN        OASN
      C
      C                   EXFMT     DETAILEDT
      C
@@ -89,12 +69,113 @@
      C     TAXLOOP       BEGSR
      C                   ENDSR
       *--------------------------------
+     C     SETUPEDT      BEGSR
+     C     ASTID         SETLL     ASSTREC
+     C                   READ      ASSETS
+     C
+     C                   MOVEL     ASSTNBR       OANBR
+     C                   MOVEL     ASSTVAL       OAVALUE
+     C                   MOVEL     ASSTNAME      OANAME
+     C                   MOVEL     ASSTDESC      OADESC
+     C                   MOVEL     ASSTTYP       OATYPE
+     C                   MOVEL     ASSTSTS       OASTS
+     C                   MOVEL     ASSTFUNC      OAFUNC
+     C                   MOVEL     ASSTACQT      OAATYPE
+     C                   MOVEL     ASSTQTY       OAQTY
+     C                   MOVEL     ASSTDONOR     OADONOR
+     C                   MOVEL     ASSTACQ       OADATEACQ
+     C                   MOVEL     ASSTDISP      OADATEDIS
+     C                   MOVEL     ASSTEMPL      OAEID
+     C                   MOVEL     ASSTREMB      OAREIMB
+     C                   MOVEL     ASSTTAX       OATAX
+     C                   MOVEL     ASSTMT        OAMT
+     C                   MOVEL     ASSTM         OAM
+     C                   MOVEL     ASSTSN        OASN
+     C                   ENDSR
+      *--------------------------------
+     C     SETUPNEW      BEGSR
+     C                   MOVEL     EMPLNAM       OAEID
+     C
+     C     *LOVAL        SETLL     ASSETS
+     C                   READ      ASSETS
+     C
+     C                   DOU       %EOF(ASSETS)
+     C                   READ      ASSETS
+     C                   ENDDO
+     C                   MOVEL     ASSTNBR       ASTID
+     C                   ADD       1             ASTID
+     C                   MOVEL     ASTID         OANBR
+     C
+     C                   ADD       1             NEWQTY
+     C                   MOVEL     NEWQTY        OAQTY
+     C                   ENDSR
+      *--------------------------------
      C     VALIDATE      BEGSR
      C                   IF        OANAME = *BLANK
      C                   MOVEL     *ON           *IN70
      C                   MOVEL     ERRNAME       ERRORLINE
      C                   ELSE
-     C                   EVAL      ALWSAV = 1
+     C                   ADD       1             ALWSAV
+     C                   ENDIF
+     C
+     C                   IF        OAQTY = *BLANK
+     C                   MOVEL     ERRTEST       ERRORLINE
+     C                   ELSE
+     C                   ADD       1             ALWSAV
+     C                   ENDIF
+     C
+     C*                  IF        OAVALUE = *BLANK
+     C*                  MOVEL     ERRTEST       ERRORLINE
+     C*                  ELSE
+     C                   ADD       1             ALWSAV
+     C*                  ENDIF
+     C
+     C                   IF        OATYPE = *BLANK
+     C                   MOVEL     ERRTYPE       ERRORLINE
+     C                   ELSE
+     C*DO ASSET TYPE TABLE CHECKING HERE
+     C                   ADD       1             ALWSAV
+     C                   ENDIF
+     C
+     C                   SELECT
+     C                   WHEN      OAATYPE = *BLANK
+     C                   MOVEL     ERRACQT       ERRORLINE
+     C                   WHEN      OAATYPE = 'D'
+     C                   ADD       1             ALWSAV
+     C                   WHEN      OAATYPE = 'P'
+     C                   ADD       1             ALWSAV
+     C                   WHEN      OAATYPE = 'L'
+     C                   ADD       1             ALWSAV
+     C                   OTHER
+     C                   MOVEL     ERRACQT       ERRORLINE
+     C                   ENDSL
+     C
+     C                   IF        OADATEACQ = *BLANK
+     C                   MOVEL     ERRTEST       ERRORLINE
+     C                   ELSE
+     C                   ADD       1             ALWSAV
+     C                   ENDIF
+     C
+     C                   IF        OALCN = *BLANK
+     C                   MOVEL     ERRTEST       ERRORLINE
+     C                   ELSE
+     C                   ADD       1             ALWSAV
+     C                   ENDIF
+     C
+     C                   IF        OAREIMB = *BLANK
+     C                   MOVEL     ERRREMB       ERRORLINE
+     C                   ELSEIF    OAREIMB = 'Y'
+     C                   ADD       1             ALWSAV
+     C                   ELSEIF    OAREIMB = 'N'
+     C                   ADD       1             ALWSAV
+     C                   ELSE
+     C                   MOVEL     ERRREMB       ERRORLINE
+     C                   ENDIF
+     C
+     C                   IF        ALWSAV = 8
+     C                   EXSR      WRITERCD
+     C                   ELSE
+     C                   MOVEL     ERRMULTI      ERRORLINE
      C                   ENDIF
      C                   ENDSR
       *--------------------------------
@@ -109,9 +190,8 @@
      C                   MOVEL     OAATYPE       ASSTACQT
      C                   MOVEL     OAQTY         ASSTQTY
      C                   MOVEL     OADONOR       ASSTDONOR
-     C*                  MOVEL     OADATEACQ     ASSTACQ
+     C                   MOVEL     OADATEACQ     ASSTACQ
      C                   MOVEL     OADATEDIS     ASSTDISP
-     C                   MOVEL     OAEID         ASSTEMPL
      C                   MOVEL     OAREIMB       ASSTREMB
      C                   MOVEL     OATAX         ASSTTAX
      C                   MOVEL     OAMT          ASSTMT
@@ -122,12 +202,13 @@
      C                   IF        NEWOREDT = 0
      C                   UPDATE    ASSTREC
      C                   ELSE
+     C                   MOVEL     EMPLNAM       ASSTEMPL
      C                   WRITE     ASSTREC
-     C                   ENDIF
      C
      C                   MOVEL     OANBR         NOTENBR
      C                   MOVEL     NOTENBR       CLPARM
      C                   CALL      'CRTNOTES'    NOTEPARM
+     C                   ENDIF
      C                   ENDSR
       *--------------------------------
      C     DIE           BEGSR
@@ -138,9 +219,13 @@
      C     CHKPARM       BEGSR
      C                   IF        ASSETNBR = 'NEW'
      C                   MOVEL     1             NEWOREDT
+     C                   MOVEL     ERRNEW        ERRORLINE
      C                   EXSR      CRTASST
+     C                   EXSR      SETUPNEW
      C                   ELSE
      C                   MOVEL     0             NEWOREDT
+     C                   EXSR      SETUPEDT
      C                   ENDIF
      C                   MOVEL     ASSETNBR      ASTID
+     C                   MOVEL     EMPID         EMPLNAM
      C                   ENDSR
