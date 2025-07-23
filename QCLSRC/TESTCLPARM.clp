@@ -1,0 +1,4 @@
+             QSYS/PGM   PARM(&PROFILE)
+             QSYS/DCL   VAR(&PROFILE) TYPE(*CHAR) LEN(10)
+             QSYS/SNDMSG MSG(&PROFILE) TOUSR(*REQUESTER)
+             QSYS/ENDPGM

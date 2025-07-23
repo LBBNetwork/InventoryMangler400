@@ -7,6 +7,9 @@
      DNEWTAXID         S              8P 0
      DSTRASSET         S              8P 0
      DENDASSET         S              8P 0
+     DALWEXIT          S              1P 0
+     DCURDATE          S               D
+     DERRCHECK         C                   CONST('Check highlighted')
       *----------------------------------------------------------
       *This program handles the donor specific things for the CCC
       *
@@ -22,6 +25,8 @@
       *The DONOR file should also have extra fields for one-time non-tang
       *ible donations; a month's free rent, $1,000 cash donation, etc
       *----------------------------------------------------------
+     C                   EVAL      CURDATE = %DATE
+     C
      C                   EXSR      GETLSTRCPT
      C
      C                   DOU       STRADD = 1
@@ -43,11 +48,17 @@
      C                   EXSR      ADDDATA
       *----------------------------------------------------
      C     ADDDATA       BEGSR
+     C                   MOVEL     CURDATE       INDATE
+     C                   DOU       ALWEXIT = 3
      C                   EXFMT     TAXADD
      C
      C                   IF        *IN05 = *ON
      C                   EXSR      VALIDATE
+     C                   IF        ALWEXIT = 3
      C                   EXSR      WRITERCD
+     C                   ELSE
+     C                   EVAL      ALWEXIT = 0
+     C                   ENDIF
      C                   ELSEIF    *IN06 = *ON
      C                   EXSR      VALIDATE
      C                   EXSR      WRITERCD
@@ -56,9 +67,9 @@
      C                   EXSR      DIE
      C                   ENDIF
      C
-     C*                  EXSR      VALIDATE
-     C*                  EXSR      WRITERCD
-     C*                  EXSR      DIE
+     C                   EVAL      *IN05 = *OFF
+     C                   ENDDO
+     C
      C                   ENDSR
       *----------------------------------------------------------
      C     GETLSTRCPT    BEGSR
@@ -76,11 +87,42 @@
      C                   ENDSR
       *----------------------------------------------------------
      C     VALIDATE      BEGSR
+     C                   IF        INDNAME = *BLANKS
+     C                   EVAL      *IN80 = *ON
+     C                   MOVEL     ERRCHECK      ERRLINE
+     C                   ELSE
+     C                   ADD       1             ALWEXIT
+     C                   ENDIF
+     C
+     C                   SELECT
+     C                   WHEN      PHYSDON = 1
+     C                   IF        INSASSET = *BLANKS
+     C                   EVAL      *IN81 = *ON
+     C                   MOVEL     ERRCHECK      ERRLINE
+     C                   ELSE
+     C                   ADD       1             ALWEXIT
+     C                   ENDIF
+     C
+     C                   IF        INEASSET = *BLANKS
+     C                   EVAL      *IN82 = *ON
+     C                   MOVEL     ERRCHECK      ERRLINE
+     C                   ELSE
+     C                   ADD       1             ALWEXIT
+     C                   ENDIF
+     C
+     C                   WHEN      PHYSDON = 0
+     C                   IF        INNTDESC = *BLANKS
+     C                   EVAL      *IN83 = *ON
+     C                   MOVEL     ERRCHECK      ERRLINE
+     C                   ELSE
+     C                   ADD       2             ALWEXIT
+     C                   ENDIF
+     C
+     C                   ENDSL
+     C
      C                   ENDSR
       *---------------------------------------------------------
      C     WRITERCD      BEGSR
-     C*                  OPEN      TAXRCPT
-     C
      C                   MOVE      NEWTAXID      TAXNBR
      C                   MOVEL     INDNAME       TAXNAME
      C                   MOVEL     INDADDR       TAXSTREET
@@ -93,11 +135,17 @@
      C                   MOVEL     'NA'          TAXNTITM
      C                   MOVEL     0             TAXNTVALU
      C
-     C                   MOVEL     INSASSET      STRASSET
-     C                   MOVEL     INEASSET      ENDASSET
+     C                   MOVE      INSASSET      STRASSET
+     C                   MOVE      INEASSET      ENDASSET
      C
+     C                   SUB       1             STRASSET
      C     STRASSET      CHAIN     ASSTREC
-     C*                  READ      ASSETS
+     C                   IF        STRASSET = ENDASSET
+     C                   MOVEL     NEWTAXID      ASSTTID
+     C                   MOVEL     'Y'           ASSTTAX
+     C                   MOVEL     INDNAME       ASSTDONOR
+     C                   UPDATE    ASSTREC
+     C                   ELSE
      C                   DOU       STRASSET = ENDASSET
      C                   MOVEL     NEWTAXID      ASSTTID
      C                   MOVEL     'Y'           ASSTTAX
@@ -106,9 +154,11 @@
      C                   ADD       1             STRASSET
      C                   READ      ASSETS
      C                   ENDDO
+     C                   ENDIF
+     C
      C                   ELSE
      C                   MOVEL     INNTDESC      TAXNTITM
-     C                   MOVEL     INNTVALUE     TAXNTVALU
+     C                   MOVE      INNTVALUE     TAXNTVALU
      C                   ENDIF
      C
      C                   WRITE     TAXREC

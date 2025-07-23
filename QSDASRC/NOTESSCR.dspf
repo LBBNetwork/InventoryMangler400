@@ -1,4 +1,4 @@
-     A*%%TS  SD  20250714  101845  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  075733  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3)
      A          R MAIN
@@ -21,7 +21,7 @@
      A                                      COLOR(BLU)
      A            OUTCONTENT  1500A  O  3  1COLOR(WHT)
      A          R MAINADMIN
-     A*%%TS  SD  20250714  101845  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  075733  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      CF05(05 'Fwd')
      A                                      CF08(08 'Back')
      A                                      CF03(03 'Exit')
@@ -40,9 +40,6 @@
      A                                      ________'
      A            INCONTENT   1500A  B  3  1CHECK(LC)
      A                                      COLOR(WHT)
-     A                                 23 63'EXTRA:'
-     A                                      COLOR(BLU)
      A                                  1 65'NEW'
      A                                      DSPATR(RI)
      A  60                                  DSPATR(ND)
-     A            INEXTRA        9A  B 23 70COLOR(BLU)

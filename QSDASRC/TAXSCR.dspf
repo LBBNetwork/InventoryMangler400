@@ -1,4 +1,4 @@
-     A*%%TS  SD  20250715  101407  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  122723  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3)
      A          R TAXSTART
@@ -19,7 +19,7 @@
      A                                  7  7'F12. Cancel'
      A                                      COLOR(WHT)
      A          R TAXADD
-     A*%%TS  SD  20250715  101407  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  122723  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      CF05(05 'Save Tax Receipt')
      A                                      CF06(06 'Save and Print Tax Receipt-
      A                                      ')
@@ -34,6 +34,7 @@
      A                                      COLOR(WHT)
      A                                  3  3'Donor Name:'
      A            INDNAME       20A  I  3 16
+     A  80                                  DSPATR(RI)
      A                                  4  3'Donor Addr:'
      A            INDADDR       50A  I  4 16
      A                                  5  3'Donor City:'
@@ -51,21 +52,32 @@
      A  70                                  DSPATR(ND)
      A            INSASSET       8A  I  8 23
      A  70                                  DSPATR(ND)
+     A  81                                  DSPATR(RI)
+     A  70                                  DSPATR(PR)
+     A                                      CHECK(RZ)
      A                                  8 35'Ending Asset ID:'
      A  70                                  DSPATR(ND)
      A            INEASSET       8A  I  8 53
      A  70                                  DSPATR(ND)
+     A  82                                  DSPATR(RI)
+     A  70                                  DSPATR(PR)
+     A                                      CHECK(RZ)
      A                                  6 43'Donation'
      A                                  6 52'Date:'
      A                                 10  3'Non-tangible Donation Description:'
      A  71                                  DSPATR(ND)
      A            INNTDESC      20A  I 10 40
      A  71                                  DSPATR(ND)
+     A  83                                  DSPATR(RI)
+     A  71                                  DSPATR(PR)
      A                                 11  3'Non-tangible Donation Value:'
      A  71                                  DSPATR(ND)
-     A            INNTVALUE      8A  I 11 40
+     A            INNTVALUE      8Y 2B 11 40EDTCDE(3)
      A  71                                  DSPATR(ND)
+     A  84                                  DSPATR(RI)
+     A  71                                  DSPATR(PR)
      A                                 23  3'F5 = Save   F6 = Save and Print   -
      A                                      F12 = Cancel'
      A                                      COLOR(BLU)
      A            ERRLINE       75A  O 13  3COLOR(RED)
+     A            INDATE        10A  B  6 59

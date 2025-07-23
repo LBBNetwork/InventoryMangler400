@@ -1,13 +1,14 @@
-     A*%%TS  SD  20250708  093210  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  061232  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3)
      A                                      PRINT
      A          R DETAIL
-     A*%%TS  SD  20250708  093210  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250717  073258  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      CF03(03 'Exit')
      A                                      CF05(05 'Edit')
      A                                      CF08(08 'Print')
      A                                      CF12(12 'Cancel')
+     A                                      CF09(09 'View Notes')
      A                                  1  3'Inventory Mangler/400 - Asset Deta-
      A                                      il View'
      A                                      COLOR(WHT)
@@ -62,8 +63,8 @@
      A                                 17 21'EMPL REIMBURSE?'
      A                                      COLOR(WHT)
      A            OAREIMB        1A  O 17 37
-     A                                 23  3'F3=Exit  F5=Edit  F8=Print  F12=Ca-
-     A                                      ncel'
+     A                                 23  3'F3=Exit  F5=Edit  F8=Print  F9=Vie-
+     A                                      w Notes  F12=Cancel'
      A                                      COLOR(BLU)
      A                                  4 19'MT/M:'
      A                                      COLOR(WHT)
@@ -74,12 +75,14 @@
      A            OASN          12A  O  4 39
      A                                 12 54'LOCATION:'
      A                                      DSPATR(HI)
-     A            OALCN         10   O 12 64
+     A            OALCN         10A  O 12 64
      A          R DETAILEDT
-     A*%%TS  SD  20250708  093210  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  061232  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      CF03(03 'Exit')
      A                                      CF05(05 'Save')
      A                                      CF12(12 'Cancel')
+     A                                      CF08(08 'Attach Donor')
+     A                                      CF09(09 'View Notes')
      A                                  1  3'Inventory Mangler/400 - Asset Edit-
      A                                      or View'
      A                                      COLOR(WHT)
@@ -88,10 +91,11 @@
      A                                      ________'
      A                                  3  3'ASST:'
      A                                      COLOR(WHT)
-     A            OANBR          8A  B  3  9
+     A            OANBR          8D  O  3  9
      A                                  3 19'NAME:'
      A                                      COLOR(WHT)
      A            OANAME        20A  B  3 25
+     A  70                                  DSPATR(RI)
      A                                  5  3'DESCRIPTION:'
      A                                      COLOR(WHT)
      A            OADESC       100A  B  6  3
@@ -104,6 +108,7 @@
      A                                 10 21'TYPE:'
      A                                      COLOR(WHT)
      A            OATYPE         2A  B 10 27
+     A  71                                  DSPATR(RI)
      A                                 10 31'STATUS:'
      A                                      COLOR(WHT)
      A            OASTS          1A  B 10 39
@@ -113,15 +118,16 @@
      A                                 10 57'ACQ TYPE:'
      A                                      COLOR(WHT)
      A            OAATYPE        1A  B 10 67
+     A  72                                  DSPATR(RI)
      A                                  3 67'QTY:'
      A                                      COLOR(WHT)
-     A            OAQTY          4A  B  3 74
+     A            OAQTY          4D  B  3 74
      A                                 12  3'DATE ACQ:'
      A                                      COLOR(WHT)
-     A            OADATEACQ     10A  B 12 13
+     A            OADATEACQ     10M  B 12 13
      A                                 12 26'DATE DISPOSED:'
      A                                      COLOR(WHT)
-     A            OADATEDIS     10A  B 12 41
+     A            OADATEDIS     10M  B 12 41
      A                                 14  3'DONOR:'
      A                                      COLOR(WHT)
      A            OADONOR       20A  B 14 10
@@ -134,6 +140,7 @@
      A                                 17 21'EMPL REIMBURSE?'
      A                                      COLOR(WHT)
      A            OAREIMB        1A  B 17 37
+     A  74                                  DSPATR(RI)
      A                                  4 19'MT/M:'
      A                                      COLOR(WHT)
      A            OAMT           4A  B  4 25
@@ -144,6 +151,12 @@
      A            ERRORLINE     75A  O 21  3COLOR(RED)
      A                                 12 54'LOCATION:'
      A                                      DSPATR(HI)
-     A            OALCN         10   B 12 64
-     A                                 23  3'F3=Exit  F5=Save  F12=Cancel'
+     A            OALCN         10A  B 12 64
+     A  73                                  DSPATR(RI)
+     A                                 23  3'F3=Exit  F5=Save  F8=Attach Donor -
+     A                                       F9=View Notes  F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 14 54'Date Field is:'
+     A                                      COLOR(BLU)
+     A                                 15 54'YYYY-MM-DD'
      A                                      COLOR(BLU)

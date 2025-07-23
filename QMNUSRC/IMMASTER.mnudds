@@ -1,5 +1,5 @@
      A* Free Form Menu: IMMASTER
-     A*%%TS  SD  20250718  103524  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  134236  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3                  -
      A                                             27 132 *DS4)
@@ -7,7 +7,7 @@
      A                                      INDARA
      A                                      PRINT(*LIBL/QSYSPRT)
      A          R IMMASTER
-     A*%%TS  SD  20250718  103524  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250723  133842  QSECOFR     REL-V6R1M0  5761-WDS
      A                                      DSPMOD(*DS3)
      A                                      LOCK
      A                                      SLNO(01)
@@ -25,8 +25,8 @@
      A                                      COLOR(BLU)
      A                                  6  7'1. Add New Asset'
      A                                  7  7'2. Edit Existing Asset'
-     A                                  8  7'3. Barcode Lookup'
-     A                                  9  7'4. Asset Search'
+     A                                  8  7'3. Asset Search (not implemented)'
+     A                                  9  7'4. View Single Asset'
      A* CMDPROMPT  Do not delete this DDS spec.
      A                                019  2'Selection or command              -
      A                                          '
@@ -37,6 +37,7 @@
      A                                      COLOR(WHT)
      A                                  5 41'assist you today?'
      A                                      COLOR(WHT)
-     A                                 12  7'5. Create Tax Receipt'
+     A                                 14  7'6. Create Tax Receipt'
      A                                  5  2'Asset Management '
-     A                                 11  2'Tax & Donation'
+     A                                 13  3'Tax & Donation'
+     A                                 10  7'5. View All Assets'

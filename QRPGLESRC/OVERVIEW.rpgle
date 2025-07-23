@@ -31,27 +31,24 @@
      C                   READ      ASSETS                                 90
      C                   ENDDO
      C
-     C*                  CLOSE     ASSETS
-     C
      C                   EXFMT     OVRCTL
      C
      C                   READC     OVRSFL
      C
+     C                   DOU       %EOF
      C                   SELECT
      C                   WHEN      SFLOPT = '1'
      C                   EXSR      VIEWDTL
      C                   ENDSL
+     C
+     C                   READC     OVRSFL
+     C                   ENDDO
      C
      C                   MOVEL     *ON           *INLR
      C                   RETURN
       *--------------------------------
      C     VIEWDTL       BEGSR
      C                   MOVE      SFLASSTNBR    ASST
-     C     ASST          CHAIN     ASSETS                             91
-     C                   IF        *IN91 = *OFF
-     C                   MOVE      ASSTNBR       AID
-     C*                  MOVEL     1             AID
-     C                   CLOSE     ASSETS
+     C                   MOVE      ASST          AID
      C                   CALL      'ASSETVIEW'   PARMLIST
-     C                   ENDIF
      C                   ENDSR
