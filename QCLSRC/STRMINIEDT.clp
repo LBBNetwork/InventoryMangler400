@@ -1,0 +1,6 @@
+             QSYS/PGM   PARM(&AID)
+             QSYS/DCL   VAR(&AID) TYPE(*CHAR) LEN(8)
+             QSYS/DCL   VAR(&PROFILE) TYPE(*CHAR) LEN(10)
+             QSYS/RTVJOBA CURUSER(&PROFILE)
+             QSYS/CALL  PGM(INVMGLR400/MINIEDT) PARM(&AID &PROFILE)
+             QSYS/ENDPGM

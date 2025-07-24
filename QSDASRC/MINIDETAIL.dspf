@@ -1,4 +1,4 @@
-     A*%%TS  SD  20250709  144942  QSECOFR     REL-V6R1M0  5761-WDS
+     A*%%TS  SD  20250724  110245  QSECOFR     REL-V6R1M0  5761-WDS
      A*%%EC
      A                                      DSPSIZ(24 80 *DS3)
      A          R SCRATCH
@@ -56,3 +56,177 @@
      A                                 11  3'ASSET'
      A                                 11  9'ID'
      A            FLD021         8   I 11 13
+     A          R DETAILEDT
+     A*%%TS  SD  20250724  103353  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF05(05 'Save Asset')
+     A                                      CF03(03 'Exit')
+     A                                      CF12(12 'Cancel')
+     A                                  1  2'IM/400 Mini Add      .            -
+     A                                                                         -
+     A                                                 '
+     A                                  2 23'.'
+     A                                  3 23'.'
+     A                                  4 23'.'
+     A                                  5 23'.'
+     A                                  6 23'.'
+     A                                  7 23'.'
+     A                                 14  1'...................... '
+     A                                  2  3'ASSET NAME'
+     A                                 12 19'   '
+     A                                 12 17' '
+     A                                 13  2'ENT SavAst SH2 Quit'
+     A                                 13 23'.'
+     A            OANAME        19A  B  3  3
+     A  70                                  DSPATR(RI)
+     A                                  4  3'Q'
+     A                                  6  3'SN'
+     A            OASN          15A  B  6  7
+     A                                  7  3'LCN'
+     A            OALCN         14A  B  7  8
+     A  73                                  DSPATR(RI)
+     A                                  8  3'ACQD'
+     A            OADATEACQ     10M  B  8  9
+     A                                  9  3'EID'
+     A            OAEID          3A  B  9  7
+     A                                  5  3'ACQTYPE'
+     A            OAATYPE        1A  B  5 11
+     A  72                                  DSPATR(RI)
+     A            ERRORLINE     20A  O 11  3COLOR(RED)
+     A            OAQTY          4A  B  4  5
+     A                                 20 57'Stare long enough into'
+     A                                 21 57'the void; it stares'
+     A                                 22 57'back into you'
+     A                                  9 11'EREM'
+     A            OAREIMB        1A  B  9 16
+     A  74                                  DSPATR(RI)
+     A                                  4 10'ASTTYP'
+     A            OATYPE         2A  B  4 17
+     A  71                                  DSPATR(RI)
+     A            OANBR          8A  O 10  7
+     A                                 10  3'AID'
+     A          R DETAIL
+     A*%%TS  SD  20250724  105246  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF05(05 'Save Asset')
+     A                                      CF03(03 'Exit')
+     A                                      CF12(12 'Cancel')
+     A                                  1  2'IM/400 Mini View     .            -
+     A                                                                         -
+     A                                                 '
+     A                                  2 23'.'
+     A                                  3 23'.'
+     A                                  4 23'.'
+     A                                  5 23'.'
+     A                                  6 23'.'
+     A                                  7 23'.'
+     A                                 14  1'...................... '
+     A                                  2  3'ASSET NAME'
+     A                                 12 19'   '
+     A                                 12 17' '
+     A                                 13  2'ENT SavAst SH2 Quit'
+     A                                 13 23'.'
+     A            OANAME        19A  O  3  3
+     A                                  4  3'Q'
+     A                                  6  3'SN'
+     A            OASN          15A  O  6  7
+     A                                  7  3'LCN'
+     A            OALCN         14A  O  7  8
+     A                                  8  3'ACQD'
+     A            OADATEACQ     10M  O  8  9
+     A                                  9  3'EID'
+     A            OAEID          3A  O  9  7
+     A                                  5  3'ACQTYPE'
+     A            OAATYPE        1A  O  5 11
+     A            OAQTY          4A  O  4  5
+     A                                 20 57'Stare long enough into'
+     A                                 21 57'the void; it stares'
+     A                                 22 57'back into you'
+     A                                  9 11'EREM'
+     A            OAREIMB        1A  O  9 16
+     A                                  4 10'ASTTYP'
+     A            OATYPE         2A  O  4 17
+     A            OANBR          8A  O 10  7
+     A                                 10  3'AID'
+     A          R MINISTART
+     A*%%TS  SD  20250724  110245  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF05(05 'Save Asset')
+     A                                      CF03(03 'Exit')
+     A                                      CF12(12 'Cancel')
+     A                                  1  2'                     .            -
+     A                                                                         -
+     A                                                 '
+     A                                  2 23'.'
+     A                                  3 23'.'
+     A                                  4 23'.'
+     A                                  5 23'.'
+     A                                  6 23'.'
+     A                                  7 23'.'
+     A                                 14  1'...................... '
+     A                                 12 19'   '
+     A                                 12 17' '
+     A                                 13 23'.'
+     A                                  2  3'Welcome to IM/400'
+     A                                  8 23'.'
+     A                                  9 23'.'
+     A                                 10 23'.'
+     A                                 11 23'.'
+     A                                 12 23'.'
+     A                                  4  2'1. Start Full System'
+     A                                  6  2'2. Start Mini System'
+     A                                  8  2'Your Choice?'
+     A            INOPT          1D  I  8 17
+     A          R MINIMENU
+     A*%%TS  SD  20250724  110245  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF05(05 'Save Asset')
+     A                                      CF03(03 'Exit')
+     A                                      CF12(12 'Cancel')
+     A                                  1  2'                     .            -
+     A                                                                         -
+     A                                                 '
+     A                                  2 23'.'
+     A                                  3 23'.'
+     A                                  4 23'.'
+     A                                  5 23'.'
+     A                                  6 23'.'
+     A                                  7 23'.'
+     A                                 14  1'...................... '
+     A                                 12 19'   '
+     A                                 12 17' '
+     A                                 13 23'.'
+     A                                  2  3'IM/400 Mini Menu'
+     A                                  8 23'.'
+     A                                  9 23'.'
+     A                                 10 23'.'
+     A                                 11 23'.'
+     A                                 12 23'.'
+     A                                  4  2'1. Add Asset'
+     A                                  6  2'3. Asset Lookup'
+     A                                 10  2'Your Choice?'
+     A            INMNUOPT       1D  I 10 17
+     A                                  5  2'2. Edit Asset'
+     A                                  8  2'9. Sign Off'
+     A          R MINIBARCDE
+     A*%%TS  SD  20250724  110245  QSECOFR     REL-V6R1M0  5761-WDS
+     A                                      CF05(05 'Save Asset')
+     A                                      CF03(03 'Exit')
+     A                                      CF12(12 'Cancel')
+     A                                  1  2'                     .            -
+     A                                                                         -
+     A                                                 '
+     A                                  2 23'.'
+     A                                  3 23'.'
+     A                                  4 23'.'
+     A                                  5 23'.'
+     A                                  6 23'.'
+     A                                  7 23'.'
+     A                                 14  1'...................... '
+     A                                 12 19'   '
+     A                                 12 17' '
+     A                                 13 23'.'
+     A                                  2  5'IM/400 Lookup'
+     A                                  8 23'.'
+     A                                  9 23'.'
+     A                                 10 23'.'
+     A                                 11 23'.'
+     A                                 12 23'.'
+     A                                  4  2'Type or scan barcode'
+     A            INBARCDE       8D  I  6  8

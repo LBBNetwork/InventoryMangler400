@@ -1,0 +1,5 @@
+             QSYS/PGM   PARM(&BUILDTP)
+             QSYS/DCL   VAR(&BUILDTP) TYPE(*CHAR) LEN(3)
+             QSYS/DCL   VAR(&REPLY) TYPE(*CHAR) LEN(1)
+             QSYS/SNDMSG MSG(&BUILDTP) TOUSR(*REQUESTER)
+             QSYS/ENDPGM
